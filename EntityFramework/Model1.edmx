@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DueManagementSystemDatabaseModel.Store" Alias="Self" Provider="System.Data.SQLite" ProviderManifestToken="ISO8601" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="DueManagementSystemDatabaseModelStoreContainer">
+          <EntitySet Name="CustomerInformation" EntityType="DueManagementSystemDatabaseModel.Store.CustomerInformation" store:Type="Tables" />
+          <EntitySet Name="PaymentHistory" EntityType="DueManagementSystemDatabaseModel.Store.PaymentHistory" store:Type="Tables" />
+          <EntitySet Name="ProductInformation" EntityType="DueManagementSystemDatabaseModel.Store.ProductInformation" store:Type="Tables" />
+          <EntitySet Name="ProductSaleHistory" EntityType="DueManagementSystemDatabaseModel.Store.ProductSaleHistory" store:Type="Tables" />
+        </EntityContainer>
+        <EntityType Name="CustomerInformation">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Name="AutoInc" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="300" />
+          <Property Name="ShopName" Type="nvarchar" MaxLength="100" />
+          <Property Name="DueAmount" Type="decimal" Nullable="false" Precision="53" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PaymentHistory">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Name="AutoInc" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+          <Property Name="Amount" Type="decimal" Nullable="false" Precision="53" />
+          <Property Name="CustomerID" Type="integer" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductInformation">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Name="AutoInc" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Rate" Type="decimal" Nullable="false" Precision="53" />
+        </EntityType>
+        <EntityType Name="ProductSaleHistory">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Name="AutoInc" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SaleDate" Type="datetime" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Rate" Type="decimal" Nullable="false" Precision="53" />
+          <Property Name="Quantity" Type="decimal" Nullable="false" Precision="53" />
+          <Property Name="CustomerID" Type="integer" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DueManagementSystemDatabaseModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="DueManagementEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CustomerInformations" EntityType="DueManagementSystemDatabaseModel.CustomerInformation" />
+          <EntitySet Name="PaymentHistories" EntityType="DueManagementSystemDatabaseModel.PaymentHistory" />
+          <EntitySet Name="ProductInformations" EntityType="DueManagementSystemDatabaseModel.ProductInformation" />
+          <EntitySet Name="ProductSaleHistories" EntityType="DueManagementSystemDatabaseModel.ProductSaleHistory" />
+        </EntityContainer>
+        <EntityType Name="CustomerInformation">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Name="AutoInc" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Mobile" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+          <Property Name="ShopName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="DueAmount" Type="Decimal" Nullable="false" Precision="53" Scale="0" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" />
+          <Property Name="Remark" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="PaymentHistory">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Name="AutoInc" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="53" Scale="0" />
+          <Property Name="CustomerID" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductInformation">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Name="AutoInc" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="53" Scale="0" />
+        </EntityType>
+        <EntityType Name="ProductSaleHistory">
+          <Key>
+            <PropertyRef Name="AutoInc" />
+          </Key>
+          <Property Name="AutoInc" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SaleDate" Type="DateTime" Nullable="false" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="CustomerName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="53" Scale="0" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="53" Scale="0" />
+          <Property Name="CustomerID" Type="Int64" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DueManagementSystemDatabaseModelStoreContainer" CdmEntityContainer="DueManagementEntity">
+          <EntitySetMapping Name="CustomerInformations"><EntityTypeMapping TypeName="DueManagementSystemDatabaseModel.CustomerInformation"><MappingFragment StoreEntitySet="CustomerInformation">
+            <ScalarProperty Name="AutoInc" ColumnName="AutoInc" />
+            <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+            <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+            <ScalarProperty Name="Address" ColumnName="Address" />
+            <ScalarProperty Name="ShopName" ColumnName="ShopName" />
+            <ScalarProperty Name="DueAmount" ColumnName="DueAmount" />
+            <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+            <ScalarProperty Name="Remark" ColumnName="Remark" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="PaymentHistories"><EntityTypeMapping TypeName="DueManagementSystemDatabaseModel.PaymentHistory"><MappingFragment StoreEntitySet="PaymentHistory">
+            <ScalarProperty Name="AutoInc" ColumnName="AutoInc" />
+            <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+            <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+            <ScalarProperty Name="Amount" ColumnName="Amount" />
+            <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ProductInformations"><EntityTypeMapping TypeName="DueManagementSystemDatabaseModel.ProductInformation"><MappingFragment StoreEntitySet="ProductInformation">
+            <ScalarProperty Name="AutoInc" ColumnName="AutoInc" />
+            <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+            <ScalarProperty Name="Rate" ColumnName="Rate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ProductSaleHistories"><EntityTypeMapping TypeName="DueManagementSystemDatabaseModel.ProductSaleHistory"><MappingFragment StoreEntitySet="ProductSaleHistory">
+            <ScalarProperty Name="AutoInc" ColumnName="AutoInc" />
+            <ScalarProperty Name="SaleDate" ColumnName="SaleDate" />
+            <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+            <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+            <ScalarProperty Name="Rate" ColumnName="Rate" />
+            <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+            <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model1">
+        <EntityTypeShape EntityType="DueManagementSystemDatabaseModel.CustomerInformation" Width="1.5" PointX="0.75" PointY="0.75" Height="2.5571907552083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="DueManagementSystemDatabaseModel.PaymentHistory" Width="1.5" PointX="2.75" PointY="0.75" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="DueManagementSystemDatabaseModel.ProductInformation" Width="1.5" PointX="2.75" PointY="3.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="DueManagementSystemDatabaseModel.ProductSaleHistory" Width="1.5" PointX="4.75" PointY="0.75" Height="2.3648893229166656" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

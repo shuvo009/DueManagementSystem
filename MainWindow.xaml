@@ -1,0 +1,500 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:DueManagementSystem_Class_Converter="clr-namespace:EasyShopManagement.Class.Converter" xmlns:DueManagementSystem_Class_Collections="clr-namespace:EasyShopManagement.Class.Collections" x:Name="window" mc:Ignorable="d" x:Class="EasyShopManagement.MainWindow"
+        Title="Easy Shop Management" Height="575.167" Width="827.667" Icon="DueManagement.ico" Background="#FF413E3E" Foreground="White" FontSize="14.667">
+	<Window.Resources>
+		<DueManagementSystem_Class_Collections:QueryTimeCollection x:Key="QueryTimeCollectionDataSource" d:IsDataSource="True"/>
+		<DueManagementSystem_Class_Converter:Multiplication x:Key="Multiplication"/>
+		<DueManagementSystem_Class_Converter:Substraction x:Key="Substraction"/>
+		<DueManagementSystem_Class_Converter:ValuePacker x:Key="ValuePacker"/>
+		<DueManagementSystem_Class_Converter:RadioToString x:Key="RadioToString"/>
+	</Window.Resources>
+	<DockPanel LastChildFill="True" DataContext="{Binding Source={StaticResource QueryTimeCollectionDataSource}}"> 
+		
+		<Menu Height="24.666" DockPanel.Dock="Top" VerticalAlignment="Top" IsMainMenu="True" FontSize="14.667" d:IsLocked="True">
+			<MenuItem Header="_File">
+				<MenuItem Header="_Home" Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" CommandParameter="Home"/>
+				<MenuItem Header="_Exit" Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" CommandParameter="Exit"/>
+			</MenuItem>
+			<MenuItem Header="_New">
+				<MenuItem Header="_Customer" Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" CommandParameter="NewCustomer"/>
+				<Separator/>
+				<MenuItem Header="_Product" Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" CommandParameter="NewProduct"/>
+			</MenuItem>
+			<MenuItem Header="_Invoice">
+				<MenuItem Header="_New Invoice" Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" CommandParameter="Invoice"/>
+			</MenuItem>
+			<MenuItem Header="_Pament">
+				<MenuItem Header="_Pament" Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" CommandParameter="Payment"/>
+			</MenuItem>
+			<MenuItem Header="_History">
+				<MenuItem Header="_Payment History" Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" CommandParameter="PaymentHistory"/>
+				<Separator/>
+				<MenuItem Header="_Seals History" Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" CommandParameter="ProductSaleHistory"/>
+			</MenuItem>
+			<MenuItem Header="_Datebase">
+				<MenuItem Header="Database _Backup" Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" CommandParameter="DatabaseBackup"/>
+				<MenuItem Header="Database _Restore" Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" CommandParameter="DatabaseRestore"/>
+			</MenuItem>
+			<MenuItem Header="_Help">
+				<MenuItem Header="_About" Command="{Binding MainMenuCommand, ElementName=window, Mode=OneWay}" CommandParameter="About"/>
+			</MenuItem>
+		</Menu>
+		<Grid x:Name="PanelRootGrid" DockPanel.Dock="Bottom">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<!--panel New Customer Information-->
+			<Grid x:Name="PanelNewCustomer" Margin="8,24,8,23.999" HorizontalAlignment="Center" Width="635.784" RenderTransformOrigin="0.5,0.5" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+				<Grid.Triggers>
+					<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="newCustomerNew">
+		                <BeginStoryboard>
+		                    <Storyboard >
+		                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="newCustomerUpdate" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+		                            <DiscreteBooleanKeyFrame KeyTime="00:00:0.1" Value="True"/>
+		                        </BooleanAnimationUsingKeyFrames>
+		                    </Storyboard>
+		                </BeginStoryboard>
+		            </EventTrigger>
+					<EventTrigger RoutedEvent="Selector.SelectionChanged" SourceName="newCustomerList">
+		                <BeginStoryboard>
+		                    <Storyboard >
+		                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="newCustomerUpdate" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+		                            <DiscreteBooleanKeyFrame KeyTime="00:00:0.1" Value="True"/>
+		                        </BooleanAnimationUsingKeyFrames>
+		                    </Storyboard>
+		                </BeginStoryboard>
+		            </EventTrigger>
+				</Grid.Triggers>
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<Grid.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform AngleY="0.078"/>
+						<RotateTransform/>
+						<TranslateTransform Y="0.332"/>
+					</TransformGroup>
+				</Grid.RenderTransform>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="0.227*"/>
+					<ColumnDefinition Width="0.333*"/>
+					<ColumnDefinition Width="0.145*"/>
+					<ColumnDefinition Width="0.295*"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock HorizontalAlignment="Right" Margin="0,2,3.997,0" TextWrapping="Wrap" Text="Name :" VerticalAlignment="Top"/>
+				<TextBlock Margin="0,45.168,3.996,0" TextWrapping="Wrap" Text="Shop Name :" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+				<TextBlock Margin="0,86.679,3.997,0" TextWrapping="Wrap" Text="Mobile Number :" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+				<TextBlock Margin="0,196.782,3.997,0" TextWrapping="Wrap" Text="Address :" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+				<TextBlock Margin="0,126.675,3.995,0" TextWrapping="Wrap" Text="Remark :" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+				<TextBox x:Name="newCustomerName" Margin="8,2,0,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Grid.Column="1" d:LayoutOverrides="HorizontalAlignment" Text="{Binding SelectedItem.CustomerName, ElementName=newCustomerList, Mode=TwoWay,ValidatesOnDataErrors=True}" TabIndex="0" MaxLength="99"/>
+				<TextBox Margin="8,44.169,0,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Grid.Column="1" d:LayoutOverrides="HorizontalAlignment" Text="{Binding SelectedItem.ShopName, ElementName=newCustomerList, Mode=TwoWay}" TabIndex="1" MaxLength="99"/>
+				<TextBox Margin="7.999,83.679,0.001,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Grid.Column="1" d:LayoutOverrides="HorizontalAlignment" Text="{Binding SelectedItem.Mobile, ElementName=newCustomerList, Mode=TwoWay}" TabIndex="2" MaxLength="49"/>
+				<TextBox Margin="7.999,123.854,0.001,0" Grid.Column="1" d:LayoutOverrides="HorizontalAlignment" VerticalAlignment="Top" Text="{Binding SelectedItem.Remark, ElementName=newCustomerList, Mode=TwoWay}" TabIndex="3" MaxLength="99" TextWrapping="WrapWithOverflow"/>
+				<TextBox Margin="7.999,197.419,0.001,0" TextWrapping="Wrap" Grid.Column="1" AcceptsReturn="True" d:LayoutOverrides="HorizontalAlignment" Text="{Binding SelectedItem.Address, ElementName=newCustomerList, Mode=TwoWay}" Height="140" VerticalAlignment="Top" TabIndex="4" MaxLength="299"/>
+				<ListBox x:Name="newCustomerList" Grid.Column="3" Margin="1.753,37.506,7.27,88.051" DisplayMemberPath="CustomerName" TabIndex="9"/>
+				<TextBox x:Name="newCustomerSearch" Margin="1.753,5,7.269,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="3" d:LayoutOverrides="HorizontalAlignment" TabIndex="8"/>
+				<TextBlock Margin="0,5,1.715,0" TextWrapping="Wrap" Text="Search :" VerticalAlignment="Top" Grid.Column="2" HorizontalAlignment="Right"/>
+				<TextBlock HorizontalAlignment="Right" Margin="0,37.506,1.716,0" TextWrapping="Wrap" Text="List :" VerticalAlignment="Top" Grid.Column="2"/>
+				<StackPanel Grid.Column="1" Margin="-8.472,0,-17.812,82.211" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+					<Button x:Name="newCustomerNew" Content="N_ew" Width="76" Command="{Binding NewCustomerCommand, ElementName=window, Mode=OneWay}" CommandParameter="No Parameter" TabIndex="5"/>
+					<Button x:Name="newCustomerUpdate" Content="_Update" Width="76" Margin="5,0,0,0" Command="{Binding UpdateCustomerCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=newCustomerList}" TabIndex="6"  IsEnabled="False"/>
+					<Button x:Name="newCustomerDelete" Content="_Delete" Width="76" Margin="5,0,0,0" Command="{Binding DeleteCustomerCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=newCustomerList}" TabIndex="7"/>
+				</StackPanel>
+				<TextBlock Margin="0,164.723,3.997,0" TextWrapping="Wrap" Text="Due Amount :" HorizontalAlignment="Right" Height="16.139" VerticalAlignment="Top"/>
+				<xctk:DoubleUpDown Grid.Column="1" Margin="8,159.576,-0.001,0" d:LayoutOverrides="VerticalAlignment, Width" Value="{Binding SelectedItem.DueAmount, ElementName=newCustomerList, Mode=TwoWay}" Height="26" VerticalAlignment="Top"/>
+			</Grid>
+			<!--Panel New Product-->
+			<Grid x:Name="PanelNewProduct" Margin="162.358,122.501,80.025,151.833" HorizontalAlignment="Center" Width="530.067" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+				<Grid.Triggers>
+					<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="NewProductNew">
+		                <BeginStoryboard>
+		                    <Storyboard >
+		                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="NewProductUpdate" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+		                            <DiscreteBooleanKeyFrame KeyTime="00:00:0.1" Value="True"/>
+		                        </BooleanAnimationUsingKeyFrames>
+		                    </Storyboard>
+		                </BeginStoryboard>
+		            </EventTrigger>
+					<EventTrigger RoutedEvent="Selector.SelectionChanged" SourceName="NewProductList">
+		                <BeginStoryboard>
+		                    <Storyboard >
+		                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="NewProductUpdate" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+		                            <DiscreteBooleanKeyFrame KeyTime="00:00:0.1" Value="True"/>
+		                        </BooleanAnimationUsingKeyFrames>
+		                    </Storyboard>
+		                </BeginStoryboard>
+		            </EventTrigger>
+				</Grid.Triggers>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="0.22*"/>
+					<ColumnDefinition Width="0.309*"/>
+					<ColumnDefinition Width="0.112*"/>
+					<ColumnDefinition Width="0.359*"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Margin="8,9.332,0.963,0" TextWrapping="Wrap" Text="Product Name :" VerticalAlignment="Top" d:LayoutOverrides="Width" HorizontalAlignment="Right"/>
+				<TextBlock HorizontalAlignment="Right" Margin="0,53.006,0.963,0" TextWrapping="Wrap" Text="Rate :" VerticalAlignment="Top"/>
+				<TextBox Name="NewProductName" Margin="3.037,8,8,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Grid.Column="1" Text="{Binding SelectedItem.ProductName, ElementName=NewProductList, Mode=TwoWay, ValidatesOnDataErrors=True}" TabIndex="0" MaxLength="99"/>
+				<TextBox x:Name="NewProductSearch" Margin="8,9.332,10.442,0" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="3" TabIndex="5"/>
+				<TextBlock Margin="0,6.147,2.88,0" TextWrapping="Wrap" Text="Search :" VerticalAlignment="Top" Grid.Column="2" HorizontalAlignment="Right"/>
+				<TextBlock Margin="0,31.654,2.88,0" TextWrapping="Wrap" Text="List :" VerticalAlignment="Top" Grid.Column="2" HorizontalAlignment="Right"/>
+				<ListBox x:Name="NewProductList" Grid.Column="3" Margin="8,37,10.442,20.006" d:LayoutOverrides="VerticalAlignment" DisplayMemberPath="ProductName" TabIndex="6"/>
+				<xctk:DoubleUpDown Margin="3.037,49.006,8,0" VerticalAlignment="Top" Grid.Column="1" Value="{Binding SelectedItem.Rate, ElementName=NewProductList, Mode=TwoWay}" TabIndex="1" Minimum="0"/>
+				<StackPanel Grid.Column="1" Margin="-37.037,103.44,22.192,0" Orientation="Horizontal" Grid.ColumnSpan="2" d:LayoutOverrides="GridBox" HorizontalAlignment="Center" VerticalAlignment="Top">
+					<Button x:Name="NewProductNew" Content="N_ew" Width="76" Command="{Binding NewProductCommnad, ElementName=window, Mode=OneWay}" CommandParameter="No Parameter" TabIndex="2"/>
+					<Button x:Name="NewProductUpdate" Content="_Update" Width="76" Margin="5,0,0,0" Command="{Binding UpdateProductCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=NewProductList}" TabIndex="3" IsDefault="True" IsEnabled="False"/>
+					<Button x:Name="NewProductDelete" Content="_Delete" Width="76" Margin="5,0,0,0" Command="{Binding DeleteProductCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItem, ElementName=NewProductList}" TabIndex="4"/>
+				</StackPanel>
+			</Grid>
+			<!--Panel Invoice-->
+			<Grid x:Name="PanelInvoice" Margin="61.902,11.757,40.735,8" d:LayoutOverrides="Width, GridBox" HorizontalAlignment="Center" Visibility="Hidden" d:IsLocked="True" d:IsHidden="True">
+				<Grid.Triggers>
+					<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="InvoiceNew">
+		                <BeginStoryboard>
+		                    <Storyboard >
+		                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="InvoiceCustomer" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+		                            <DiscreteBooleanKeyFrame KeyTime="00:00:0.1" Value="True"/>
+		                        </BooleanAnimationUsingKeyFrames>
+								<BooleanAnimationUsingKeyFrames Storyboard.TargetName="InvoiceProductAdd" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+		                            <DiscreteBooleanKeyFrame KeyTime="00:00:0.1" Value="True"/>
+		                        </BooleanAnimationUsingKeyFrames>
+								<BooleanAnimationUsingKeyFrames Storyboard.TargetName="InvoiceUpdate" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+		                            <DiscreteBooleanKeyFrame KeyTime="00:00:0.1" Value="False"/>
+		                        </BooleanAnimationUsingKeyFrames>
+								<BooleanAnimationUsingKeyFrames Storyboard.TargetName="InvoiceGrid" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+		                            <DiscreteBooleanKeyFrame KeyTime="00:00:0.1" Value="True"/>
+		                        </BooleanAnimationUsingKeyFrames>
+		                    </Storyboard>
+		                </BeginStoryboard>
+		            </EventTrigger>
+					<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="InvoiceProductAdd">
+		                <BeginStoryboard>
+		                    <Storyboard >
+		                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="InvoiceCustomer" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+		                            <DiscreteBooleanKeyFrame KeyTime="00:00:0.1" Value="False"/>
+		                        </BooleanAnimationUsingKeyFrames>
+								<BooleanAnimationUsingKeyFrames Storyboard.TargetName="InvoiceUpdate" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+		                            <DiscreteBooleanKeyFrame KeyTime="00:00:0.1" Value="True"/>
+		                        </BooleanAnimationUsingKeyFrames>
+		                    </Storyboard>
+		                </BeginStoryboard>
+		            </EventTrigger>
+					<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="InvoiceUpdate">
+		                <BeginStoryboard>
+		                    <Storyboard >
+		                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="InvoiceProductAdd" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+		                            <DiscreteBooleanKeyFrame KeyTime="00:00:0.1" Value="False"/>
+		                        </BooleanAnimationUsingKeyFrames>
+								<BooleanAnimationUsingKeyFrames Storyboard.TargetName="InvoiceUpdate" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+		                            <DiscreteBooleanKeyFrame KeyTime="00:00:0.1" Value="False"/>
+		                        </BooleanAnimationUsingKeyFrames>
+								<BooleanAnimationUsingKeyFrames Storyboard.TargetName="InvoiceGrid" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+		                            <DiscreteBooleanKeyFrame KeyTime="00:00:0.1" Value="False"/>
+		                        </BooleanAnimationUsingKeyFrames>
+		                    </Storyboard>
+		                </BeginStoryboard>
+		            </EventTrigger>
+				</Grid.Triggers>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="263.91"/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<DataGrid x:Name="InvoiceGrid" Margin="124.52,8,50.147,37.507" Grid.Row="1" AutoGenerateColumns="False">
+					<DataGrid.Columns>
+						<DataGridTextColumn Header="Product" MinWidth="100" FontSize="14.667" Binding="{Binding PropductName}" IsReadOnly="True"/>
+						<DataGridTextColumn Header="Rate" MinWidth="80" Binding="{Binding Rate}" IsReadOnly="True"/>
+						<DataGridTextColumn Header="Quantity" MinWidth="100" Binding="{Binding Quantity}" IsReadOnly="True"/>
+						<DataGridTextColumn Header="Amount" MinWidth="100" Binding="{Binding Amount}" IsReadOnly="True"/>
+						<DataGridTemplateColumn Header="Remove" MinWidth="80">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<Button x:Name="InvoiceItemRemove" Content="Remove" Command="{Binding DeleteInvoiceItemCommnad, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" CommandParameter="{Binding}"/>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+				<ComboBox x:Name="InvoiceCustomer" HorizontalAlignment="Left" Margin="124.52,8,0,0" VerticalAlignment="Top" Width="195.333" DisplayMemberPath="CustomerName"/>
+				<TextBlock HorizontalAlignment="Left" Margin="8,9.998,0,0" TextWrapping="Wrap" Text="Customer Name :" VerticalAlignment="Top"/>
+				<TextBlock Margin="275.498,95.189,0,0" TextWrapping="Wrap" Text="Rate :" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+				<TextBox x:Name="InvoiceProductSearch" Margin="67.815,52.148,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="171.852"/>
+				<TextBlock Margin="0,53.147,658.732,0" TextWrapping="Wrap" Text="Search :" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+				<TextBlock Margin="0,78.654,658.732,0" TextWrapping="Wrap" Text="List :" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+				<ListBox x:Name="InvoiceProductList" Margin="67.815,84,0,3.4" HorizontalAlignment="Left" Width="171.852" d:LayoutOverrides="VerticalAlignment" DisplayMemberPath="ProductName"/>
+				<xctk:DoubleUpDown x:Name="invoiceRate" Margin="315.571,94.568,288.429,147.168" Minimum="0" Value="{Binding SelectedItem.Rate, ElementName=InvoiceProductList, Mode=TwoWay}"/>
+				<xctk:DoubleUpDown x:Name="InvoiceQuantity" Margin="315.571,125.071,288.429,116.499" Minimum="0" Value="0"/>
+				<TextBlock Margin="248.664,125.875,0,118.484" TextWrapping="Wrap" Text="Quantity :" HorizontalAlignment="Left" d:LayoutOverrides="Height"/>
+				<Button x:Name="InvoiceProductAdd" Content="_Add" Margin="315.571,196.91,281.096,34.996" Command="{Binding AddItemCommand, ElementName=window, Mode=OneWay}">
+					<Button.CommandParameter>
+						<MultiBinding Converter="{StaticResource ValuePacker}">
+							<Binding ElementName="InvoiceCustomer" Path="Text"/>
+							<Binding ElementName="InvoiceProductList" Path="SelectedItem"/>
+							<Binding ElementName="InvoiceQuantity" Path="Value"/>
+						</MultiBinding>
+					</Button.CommandParameter>
+				</Button>
+				<StackPanel Margin="248.664,0,222.365,8" VerticalAlignment="Bottom" Orientation="Horizontal" Grid.Row="1" d:LayoutOverrides="Width">
+					<Button x:Name="InvoiceNew" Content="N_ew" Width="76" Command="{Binding NewInvoiceCommand, ElementName=window, Mode=OneWay}" CommandParameter="No Parameter"/>
+					<Button x:Name="InvoiceUpdate" Content="_Update" Width="76" Margin="5,0,0,0" Command="{Binding UpdateInvoiceCommnad, ElementName=window, Mode=OneWay}">
+						<Button.CommandParameter>
+							<MultiBinding Converter="{StaticResource ValuePacker}">
+								<Binding ElementName="InvoiceGrid" Path="ItemsSource"/>
+								<Binding ElementName="invoicePayment" Path="Value"/>
+								<Binding ElementName="InvoiceDueAmount" Path="Text"/>
+								<Binding ElementName="InvoiceCustomer" Path="SelectedItem"/>
+							</MultiBinding>
+						</Button.CommandParameter>
+					</Button>
+					<Button x:Name="InvoicePrint" Content="_Print" Width="76" Margin="5,0,0,0" Command="{Binding PrintInvoiceCommnad, ElementName=window, Mode=OneWay}">
+						<Button.CommandParameter>
+							<MultiBinding Converter="{StaticResource ValuePacker}">
+								<Binding ElementName="InvoiceGrid" Path="ItemsSource"/>
+								<Binding ElementName="InvoiceCustomer" Path="SelectedItem"/>
+								<Binding ElementName="InvoiceTotalAmount" Path="Text"/>
+								<Binding ElementName="invoicePayment" Path="Value"/>
+								<Binding ElementName="InvoiceDueAmount" Path="Text"/>
+							</MultiBinding>
+						</Button.CommandParameter>
+					</Button>
+				</StackPanel>
+				<GroupBox Header="Payment Information" HorizontalAlignment="Right" Margin="0,77.654,8,3.4" Width="246.823" Foreground="#FFE2E2E2">
+					<Grid>
+						<TextBlock Text="Total Amount :" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,20.563,0,0"/>
+						<TextBlock x:Name="InvoiceTotalAmount" VerticalAlignment="Top" Margin="107.733,20.563,0,0" Text="0"/>
+						<TextBlock Text="Total Payment :" HorizontalAlignment="Left" Margin="8,55.315,0,0" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment"/>
+						<xctk:DoubleUpDown x:Name="invoicePayment" Minimum="0" Margin="111.825,53.815,8.002,77.176" Maximum="{Binding Text, ElementName=InvoiceTotalAmount}" Value="0" d:LayoutOverrides="VerticalAlignment"/>
+						<Separator Margin="0,0,0,67.324" Height="5.852" VerticalAlignment="Bottom"/>
+						<TextBlock Text="Total Due :" HorizontalAlignment="Left" Margin="34.003,0,0,43.816" VerticalAlignment="Bottom"/>
+						<TextBlock x:Name="InvoiceDueAmount" Margin="111.823,0,0,43.815" VerticalAlignment="Bottom">
+							<TextBlock.Text>
+								<MultiBinding Converter="{StaticResource Substraction}">
+									<Binding ElementName="InvoiceTotalAmount" Path="Text"/>
+									<Binding ElementName="invoicePayment" Path="Value"/>
+								</MultiBinding>
+							</TextBlock.Text>
+						</TextBlock>
+					</Grid>
+				</GroupBox>
+				<TextBlock Margin="248.664,0,0,90.816" TextWrapping="Wrap" Text="Amount :" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+				<TextBlock x:Name="InvoiceAmount" Margin="315.571,0,288.429,90.816" TextWrapping="Wrap" VerticalAlignment="Bottom">
+					<TextBlock.Text>
+						<MultiBinding Converter="{StaticResource Multiplication}" UpdateSourceTrigger="PropertyChanged">
+							<Binding ElementName="invoiceRate" Path="Value"/>
+							<Binding ElementName="InvoiceQuantity" Path="Value"/>
+						</MultiBinding>
+					</TextBlock.Text>
+				</TextBlock>
+				
+			</Grid>
+			<!--Panel Payment-->
+			<Grid x:Name="PanelPayment" Margin="248.667,151.745,204.152,159.999" HorizontalAlignment="Center" VerticalAlignment="Center" Height="201.672" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+				<Grid.Triggers>
+					<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="PaymentUpdate">
+		                <BeginStoryboard>
+		                    <Storyboard >
+		                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="PaymentUpdate" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+		                            <DiscreteBooleanKeyFrame KeyTime="00:00:0.1" Value="False"/>
+		                        </BooleanAnimationUsingKeyFrames>
+		                    </Storyboard>
+		                </BeginStoryboard>
+		            </EventTrigger>
+					<EventTrigger RoutedEvent="Selector.SelectionChanged" SourceName="PaymentCustomers">
+		                <BeginStoryboard>
+		                    <Storyboard >
+		                        <BooleanAnimationUsingKeyFrames Storyboard.TargetName="PaymentUpdate" Storyboard.TargetProperty="(UIElement.IsEnabled)">
+		                            <DiscreteBooleanKeyFrame KeyTime="00:00:0.1" Value="True"/>
+		                        </BooleanAnimationUsingKeyFrames>
+		                    </Storyboard>
+		                </BeginStoryboard>
+		            </EventTrigger>
+				</Grid.Triggers>
+				<ComboBox x:Name="PaymentCustomers" HorizontalAlignment="Left" Margin="124.52,6.666,0,0" VerticalAlignment="Top" Width="164.828" TabIndex="0" DisplayMemberPath="CustomerName"/>
+				<TextBlock Margin="8,8,0,0" TextWrapping="Wrap" Text="Customer Name :" HorizontalAlignment="Left" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+				<xctk:DoubleUpDown x:Name="PaymentPayAmount" Margin="124.52,80.493,8,0" VerticalAlignment="Top" d:LayoutOverrides="VerticalAlignment" Minimum="0" Maximum="{Binding Text, ElementName=PaymentDueAmount}" TabIndex="1" Value="0"/>
+				<TextBlock Margin="30.796,45.832,0,0" TextWrapping="Wrap" Text="Due Amount :" HorizontalAlignment="Left" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+				<TextBlock x:Name="PaymentDueAmount" Margin="124.52,45.832,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Text="{Binding SelectedItem.DueAmount, ElementName=PaymentCustomers}"/>
+				<TextBlock Margin="0.703,82.493,0,0" TextWrapping="Wrap" Text="Payment Amount :" HorizontalAlignment="Left" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+				<Separator Margin="0,108,0,0" Height="8.666" VerticalAlignment="Top"/>
+				<TextBlock Margin="30.796,120.666,0,0" TextWrapping="Wrap" Text="Remain Due :" HorizontalAlignment="Left" VerticalAlignment="Top" d:LayoutOverrides="HorizontalAlignment"/>
+				<TextBlock x:Name="PaymentRemainDue" Margin="124.52,120.666,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top">
+					<TextBlock.Text>
+						<MultiBinding Converter="{StaticResource Substraction}">
+							<Binding ElementName="PaymentDueAmount" Path="Text"/>
+							<Binding ElementName="PaymentPayAmount" Path="Value"/>
+						</MultiBinding>
+					</TextBlock.Text>
+				</TextBlock>
+				<StackPanel Height="31.834" Margin="76.496,0,56.024,19.625" VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Center">
+					<Button x:Name="PaymentUpdate" Content="_Update" Height="31" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="82.328" IsDefault="True" TabIndex="2" Command="{Binding UpdatePaymentCommnad, ElementName=window, Mode=OneWay}">
+						<Button.CommandParameter>
+							<MultiBinding Converter="{StaticResource ValuePacker}">
+								<Binding ElementName="PaymentCustomers" Path="SelectedItem"/>
+								<Binding ElementName="PaymentPayAmount" Path="Value"/>
+								<Binding ElementName="PaymentRemainDue" Path="Text"/>
+							</MultiBinding>
+						</Button.CommandParameter>
+					</Button>
+					<Button x:Name="PaymentPrint" Content="_Print" Height="31" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="82.328" IsDefault="True" Margin="5,0,0,0" TabIndex="3" Command="{Binding PrintPaymentCommand, ElementName=window, Mode=OneWay}">
+						<Button.CommandParameter>
+							<MultiBinding Converter="{StaticResource ValuePacker}">
+								<Binding ElementName="PaymentCustomers" Path="SelectedItem"/>
+								<Binding ElementName="PaymentPayAmount" Path="Value"/>
+								<Binding ElementName="PaymentRemainDue" Path="Text"/>
+								<Binding ElementName="PaymentDueAmount" Path="Text"/>
+							</MultiBinding>
+						</Button.CommandParameter>
+					</Button>
+				</StackPanel>
+			</Grid>
+			<!--Panel Propduct Sale History-->
+			<Grid x:Name="PanelProductSaleHistory" Margin="0,37.667,0,8" HorizontalAlignment="Center" Width="803.111" Visibility="Hidden" d:IsLocked="True" d:IsHidden="True">
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<ComboBox x:Name="SaleHistoryCustomerList" Margin="124.52,8,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="169" DisplayMemberPath="CustomerName" IsEnabled="{Binding IsChecked, ElementName=SaleHistoryWithCustomer}"/>
+				<TextBlock HorizontalAlignment="Left" Margin="8,9.5,0,0" TextWrapping="Wrap" Text="Customer Name :" VerticalAlignment="Top"/>
+				<DataGrid x:Name="SaleHistoryGrid" Margin="235.965,47.507,0,8" HorizontalAlignment="Center" Width="565.691" AutoGenerateColumns="False" IsReadOnly="True">
+					<DataGrid.Columns>
+						<DataGridTextColumn Header="Date" MinWidth="80" Binding="{Binding SaleDate,StringFormat={}\{0:dd/MM/yyyy\}}"/>
+						<DataGridTextColumn Header="Product" MinWidth="100" Binding="{Binding PropductName}"/>
+						<DataGridTextColumn Header="Rate" MinWidth="60" Binding="{Binding Rate}"/>
+						<DataGridTextColumn Header="Quantiy" MinWidth="80" Binding="{Binding Quantity}"/>
+						<DataGridTextColumn Header="Amount" MinWidth="100" Binding="{Binding Amount}"/>
+						<DataGridTextColumn Header="Customer Name" MinWidth="100" Binding="{Binding CustomerName}"/>
+					</DataGrid.Columns>
+				</DataGrid>
+				<GroupBox Header="Searching Option" Margin="8,79.5,0,0" HorizontalAlignment="Left" Width="223.965" VerticalAlignment="Top" Height="274.266" Foreground="#FFDEDEDE">
+					<Grid>
+						<RadioButton x:Name="radioButton" Content="By Date " Margin="8,8,0,0" VerticalAlignment="Top" Foreground="#FFE2E2E2" HorizontalAlignment="Left" IsChecked="{Binding SelectedRadioButton, ConverterParameter=ByDate, Converter={StaticResource RadioToString}, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						<RadioButton x:Name="radioButton1" Content="Between To Date " Margin="8,38.506,0,0" VerticalAlignment="Top" Foreground="#FFE2E2E2" HorizontalAlignment="Left" IsChecked="{Binding SelectedRadioButton, ConverterParameter=BetweenTwoDate, Converter={StaticResource RadioToString}, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						<RadioButton Content="All" Margin="8.665,0,0,48.887" VerticalAlignment="Bottom" Foreground="#FFE2E2E2" HorizontalAlignment="Left" IsChecked="{Binding SelectedRadioButton, ConverterParameter=All, Converter={StaticResource RadioToString}, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						<DatePicker Name="SaleHistoryFirstDate" Margin="81.923,4,0,0" VerticalAlignment="Top" IsEnabled="{Binding IsChecked, ElementName=radioButton}"/>
+						<DatePicker Name="SaleHistorySecondDate" Margin="81.923,62.012,0,0" VerticalAlignment="Top" IsEnabled="{Binding IsChecked, ElementName=radioButton1}"/>
+						<DatePicker Name="SaleHistoryThirdDate" Margin="81.923,93.518,0,0" VerticalAlignment="Top" IsEnabled="{Binding IsChecked, ElementName=radioButton1}"/>
+						<RadioButton x:Name="radioButton2" Content="Older Then" Margin="8.665,0,0,107.055" VerticalAlignment="Bottom" Foreground="#FFE2E2E2" HorizontalAlignment="Left" d:LayoutOverrides="VerticalAlignment" IsChecked="{Binding SelectedRadioButton, ConverterParameter=OlderThan, Converter={StaticResource RadioToString}, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						<ComboBox x:Name="SaleHistoryOdlderThenTime" Margin="82.59,0,-0.667,77.545" VerticalAlignment="Bottom" IsEnabled="{Binding IsChecked, ElementName=radioButton2}" ItemsSource="{Binding Mode=OneWay}" DisplayMemberPath="Name"/>
+						<Button x:Name="SaleHistorySearch" Content="_Search" HorizontalAlignment="Left" Height="32.667" VerticalAlignment="Bottom" Width="121.667" Margin="81.923,0,0,8" Command="{Binding SearchSaleHistoryCommnad, ElementName=window, Mode=OneWay}">
+							<Button.CommandParameter>
+								<MultiBinding Converter="{StaticResource ValuePacker}">
+									<Binding ElementName="SaleHistoryCustomerList" Path="SelectedItem"/>
+									<Binding ElementName="SaleHistoryFirstDate" Path="SelectedDate"/>
+									<Binding ElementName="SaleHistorySecondDate" Path="SelectedDate"/>
+									<Binding ElementName="SaleHistoryThirdDate" Path="SelectedDate"/>
+									<Binding ElementName="SaleHistoryOdlderThenTime" Path="SelectedItem"/>
+									<Binding ElementName="SaleHistoryWithCustomer" Path="IsChecked"/>
+								</MultiBinding>
+						</Button.CommandParameter>
+					</Button>
+					</Grid>
+				</GroupBox>
+				<StackPanel HorizontalAlignment="Left" Margin="65,369.177,0,0" Width="123" VerticalAlignment="Top">
+					<Button x:Name="SaleHistoryReport" Content="_Print" Height="26" Command="{Binding PrintSaleHistoryCommand, ElementName=window, Mode=OneWay}">
+						<Button.CommandParameter>
+								<MultiBinding Converter="{StaticResource ValuePacker}">
+									<Binding ElementName="SaleHistoryCustomerList" Path="SelectedItem"/>
+									<Binding ElementName="SaleHistoryGrid" Path="ItemsSource"/>
+									<Binding ElementName="SaleHistoryWithCustomer" Path="IsChecked"/>
+								</MultiBinding>
+						</Button.CommandParameter>
+					</Button>
+					<Button x:Name="SaleHistoryDelete" Content="_Delete" Height="26" Margin="0,5,0,0" Command="{Binding DeleteSaleHistoryCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItems, ElementName=SaleHistoryGrid}"/>
+					<Button x:Name="SaleHistoryDeleteAll" Content="Delete _All" Height="26" Margin="0,5,0,0" Command="{Binding AllDeleteSaleHistoryCommand , ElementName=window, Mode=OneWay}" CommandParameter="{Binding ItemsSource, ElementName=SaleHistoryGrid}"/>
+				</StackPanel>
+				<RadioButton x:Name="SaleHistoryWithCustomer" Content="With Customer Name" Margin="8,40.17,0,0" VerticalAlignment="Top" Foreground="#FFE2E2E2" HorizontalAlignment="Left" IsChecked="True"/>
+				<RadioButton x:Name="SaleHistoryWithoutCustomer" Content="Without Customer Name" Margin="8,59.674,0,0" VerticalAlignment="Top" Foreground="#FFE2E2E2" HorizontalAlignment="Left"/>
+			</Grid>
+			<!--Panel Payment History-->
+			<Grid x:Name="PanelPaymentHistory" Margin="124.5,35.856,114.402,32.855" HorizontalAlignment="Center" Width="560.289" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<ComboBox x:Name="PaymentHisCutomerList" Margin="124.52,8,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="169" IsEnabled="{Binding IsChecked, ElementName=PaymentHisWithCustomer}" DisplayMemberPath="CustomerName"/>
+				<TextBlock HorizontalAlignment="Left" Margin="8,9.5,0,0" TextWrapping="Wrap" Text="Customer Name :" VerticalAlignment="Top"/>
+				<DataGrid x:Name="PaymentHisGrid" Margin="235.965,48.673,0,6.668" HorizontalAlignment="Center" Width="325.324" AutoGenerateColumns="False" IsReadOnly="True">
+					<DataGrid.Columns>
+						<DataGridTextColumn Header="Date" MinWidth="80" Binding="{Binding PaymentDate,StringFormat={}\{0:dd/MM/yyyy\}}"/>
+						<DataGridTextColumn Header="Amount" MinWidth="100" Binding="{Binding Amount}"/>
+						<DataGridTextColumn Header="Customer Name" MinWidth="100" Binding="{Binding CustomerName}"/>
+					</DataGrid.Columns>
+				</DataGrid>
+				<GroupBox Header="Searching Option" Margin="8,72.5,0,0" HorizontalAlignment="Left" Width="223.965" Height="278.666" VerticalAlignment="Top" Foreground="#FFE0E0E0">
+					<Grid>
+						<RadioButton x:Name="PaymentHisByDate" Content="By Date " Margin="8,8,0,0" VerticalAlignment="Top" Foreground="#FFE2E2E2" HorizontalAlignment="Left" IsChecked="{Binding SelectedRadioButton, ConverterParameter=ByDate, Converter={StaticResource RadioToString}, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						<RadioButton x:Name="PaymentHisBetweendTwo" Content="Between To Date " Margin="8,38.506,0,0" VerticalAlignment="Top" Foreground="#FFE2E2E2" HorizontalAlignment="Left" IsChecked="{Binding SelectedRadioButton, ConverterParameter=BetweenTwoDate, Converter={StaticResource RadioToString}, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						<RadioButton x:Name="PaymentHisAll" Content="All" Margin="8.665,0,0,48.887" VerticalAlignment="Bottom" Foreground="#FFE2E2E2" HorizontalAlignment="Left" IsChecked="{Binding SelectedRadioButton, ConverterParameter=All, Converter={StaticResource RadioToString}, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						<DatePicker x:Name="PaymentHisFirstDate" Margin="81.923,4,0,0" VerticalAlignment="Top" IsEnabled="{Binding IsChecked, ElementName=PaymentHisByDate}"/>
+						<DatePicker x:Name="PaymentHisSecondDate" Margin="81.923,62.012,0,0" VerticalAlignment="Top" IsEnabled="{Binding IsChecked, ElementName=PaymentHisBetweendTwo}"/>
+						<DatePicker x:Name="PaymentHisThirdDate" Margin="81.923,93.518,0,0" VerticalAlignment="Top" IsEnabled="{Binding IsChecked, ElementName=PaymentHisBetweendTwo}"/>
+						<RadioButton x:Name="PaymentHisOlderThen" Content="Older Then" Margin="8.665,0,0,107.055" VerticalAlignment="Bottom" Foreground="#FFE2E2E2" HorizontalAlignment="Left" d:LayoutOverrides="VerticalAlignment" IsChecked="{Binding SelectedRadioButton, ConverterParameter=OlderThan, Converter={StaticResource RadioToString}, ElementName=window, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+						<ComboBox x:Name="PaymentHisQueryTime" Margin="82.59,0,-0.667,77.545" VerticalAlignment="Bottom" IsEnabled="{Binding IsChecked, ElementName=PaymentHisOlderThen}" ItemsSource="{Binding Mode=OneWay}" DisplayMemberPath="Name"/>
+						<Button x:Name="PaymentHisSearch" Content="_Search" HorizontalAlignment="Left" Height="32.667" VerticalAlignment="Bottom" Width="121.667" Margin="68,0,0,8" Command="{Binding SearchPaymentHistoryCommand, ElementName=window, Mode=OneWay}">
+							<Button.CommandParameter>
+								<MultiBinding Converter="{StaticResource ValuePacker}">
+									<Binding ElementName="PaymentHisCutomerList" Path="SelectedItem"/>
+									<Binding ElementName="PaymentHisFirstDate" Path="SelectedDate"/>
+									<Binding ElementName="PaymentHisSecondDate" Path="SelectedDate"/>
+									<Binding ElementName="PaymentHisThirdDate" Path="SelectedDate"/>
+									<Binding ElementName="PaymentHisQueryTime" Path="SelectedItem"/>
+									<Binding ElementName="PaymentHisWithCustomer" Path="IsChecked"/>
+								</MultiBinding>
+						</Button.CommandParameter>
+					</Button>
+					</Grid>
+				</GroupBox>
+				<StackPanel HorizontalAlignment="Left" Margin="60.417,354.666,0,0" Width="123" VerticalAlignment="Top">
+					<Button x:Name="PaymentHisPrint" Content="_Print" Height="26" Command="{Binding PrintPaymentHistoryCommand, ElementName=window, Mode=OneWay}">
+						<Button.CommandParameter>
+								<MultiBinding Converter="{StaticResource ValuePacker}">
+									<Binding ElementName="PaymentHisCutomerList" Path="SelectedItem"/>
+									<Binding ElementName="PaymentHisGrid" Path="ItemsSource"/>
+									<Binding ElementName="PaymentHisWithCustomer" Path="IsChecked"/>
+								</MultiBinding>
+						</Button.CommandParameter>
+					</Button>
+					<Button x:Name="PaymentHisDelete" Content="_Delete" Height="26" Margin="0,5,0,0" Command="{Binding DeletePaymentHistoryCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding SelectedItems, ElementName=PaymentHisGrid}"/>
+					<Button x:Name="PaymentHisDeleteAll" Content="Delete _All" Height="26" Margin="0,5,0,0" Command="{Binding DeleteAllPaymentHistoryCommand, ElementName=window, Mode=OneWay}" CommandParameter="{Binding ItemsSource, ElementName=PaymentHisGrid}"/>
+				</StackPanel>
+				<RadioButton x:Name="PaymentHisWithCustomer" Content="With Customer Name" Margin="8,33.006,0,0" VerticalAlignment="Top" Foreground="#FFE2E2E2" HorizontalAlignment="Left" IsChecked="True"/>
+				<RadioButton x:Name="PaymentHisWithOutCustomer" Content="Without Customer Name" Margin="8,53.673,0,0" VerticalAlignment="Top" Foreground="#FFE2E2E2" HorizontalAlignment="Left"/>
+			</Grid>
+			<!--Panel Home-->
+			<Grid x:Name="PanelHome" Visibility="Visible" d:IsHidden="True" d:IsLocked="True">
+				<TextBlock Margin="307.988,193.926,309.365,0" TextWrapping="Wrap" Text="Milon Traders" FontSize="32" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+				<TextBlock Margin="284.988,231.737,284.321,0" TextWrapping="Wrap" Text="Modhugonj Bazar, Kaligonj, Jhenidah." HorizontalAlignment="Center" Height="21.506" VerticalAlignment="Top"/>
+				<TextBlock Margin="256.883,253.489,253.843,239.505" TextWrapping="Wrap" Text="Pro : Milon Kumer Dutta, Phone : 04523-56081" HorizontalAlignment="Center" d:LayoutOverrides="Height"/>
+				<TextBlock TextWrapping="Wrap" Text="Powered by : Dreamer" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,20,10"/>
+			</Grid>
+			<Grid x:Name="PanelDatabaseRestore" Margin="277.003,145.669,251.999,151.833" HorizontalAlignment="Center" VerticalAlignment="Center" Height="138.545" Width="269.498" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+				<TextBlock x:Name="DRestorePath" Margin="8,8,0,0" VerticalAlignment="Top" d:LayoutOverrides="Width"/>
+				<Button x:Name="DRestoreBrowse" Content="_Browse" HorizontalAlignment="Left" Margin="8,31.507,0,0" Width="69.229" Height="27.333" VerticalAlignment="Top" Command="{Binding FileBrowseDRCommand, ElementName=window, Mode=OneWay}" CommandParameter="No Paremeter"/>
+				<Button x:Name="DResore" Content="_Restore" HorizontalAlignment="Left" Width="117.998" Margin="106.5,68.502,0,24" Command="{Binding DatabseRestoreCommand, ElementName=window, Mode=OneWay}" CommandParameter="No Parameter"/>
+			</Grid>
+			<Grid x:Name="PanelDatabaseBackup" HorizontalAlignment="Center" Height="105.016" Margin="320,128.959,278.64,159.542" VerticalAlignment="Center" Width="189.039" Visibility="Hidden" d:IsHidden="True" d:IsLocked="True">
+				<Button x:Name="DbackupBrowse" Content="_Browse" Height="48" VerticalAlignment="Top" Command="{Binding FolderBrowseDBCommand, ElementName=window, Mode=OneWay}" CommandParameter="No Parameter"/>
+				<Button x:Name="Dbackup" Content="_Backup" Height="48" Margin="0,0,0,-0.984" VerticalAlignment="Bottom" Command="{Binding DatabseBackupCommand, ElementName=window, Mode=OneWay}" CommandParameter="No Parameter"/>
+			</Grid>
+			<Grid x:Name="PanelAbout" Margin="140.36,181.324,120.64,190.06" HorizontalAlignment="Center" VerticalAlignment="Center" Width="548.704" Visibility="Hidden" d:IsLocked="True" d:IsHidden="True">
+				<GroupBox Header="Product Information" Margin="8,8,0,0" Height="132.674" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="#FFDEDEDE">
+					<Grid>
+						<TextBlock Margin="8,8,0,0" TextWrapping="Wrap" Text="Name : Easy Shop Management" VerticalAlignment="Top" d:LayoutOverrides="Width"/>
+						<TextBlock Margin="8,31.506,0,0" TextWrapping="Wrap" Text="Version : 1.00.00.05" VerticalAlignment="Top" d:LayoutOverrides="Width"/>
+						<TextBlock Margin="8,55.012,8,0" TextWrapping="Wrap" Text="Licensed By : Milon Traders" VerticalAlignment="Top"/>
+						<TextBlock Margin="8,78.518,8,0" TextWrapping="Wrap" Text="Developed By : Md. Hasanuzzaman" VerticalAlignment="Top"/>
+						
+					</Grid>
+				</GroupBox>
+				<GroupBox Header="Company Information" Margin="0,8,0,0" Height="132.674" VerticalAlignment="Top" HorizontalAlignment="Right" Foreground="Gainsboro">
+					<Grid>
+						<TextBlock Margin="8,8,0,0" TextWrapping="Wrap" Text="Name : Dreamer" VerticalAlignment="Top" d:LayoutOverrides="Width"/>
+						<TextBlock Margin="8,31.506,0,0" TextWrapping="Wrap" Text="Location : Dhaka" VerticalAlignment="Top" d:LayoutOverrides="Width"/>
+						<TextBlock Margin="8,55.012,8,0" TextWrapping="Wrap" Text="E-Mail : wrdreamer@live.com" VerticalAlignment="Top"/>
+						
+					</Grid>
+				</GroupBox>
+			</Grid>
+		</Grid>
+	</DockPanel>
+    
+</Window>
